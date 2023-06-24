@@ -189,6 +189,11 @@ download_required_files() {
 	echo "100"
 }
 
+if [[ ! -f "$ER_PATH"/eldenring.exe ]]; then
+   $ZENITY --error --title "Elden Proton" --text "Could not find Elden Ring installation in $ER_PATH"
+   exit 1
+fi
+
 download_required_files | $ZENITY --progress --auto-close --percentage=0 --title "Elden Proton" --text "Downloading required files" || true
 
 mkdir -p "$ER_PATH"/EldenProton
