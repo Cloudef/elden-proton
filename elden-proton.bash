@@ -172,6 +172,7 @@ download_enabled_dll_mods() {
 			mv "$ER_PATH/$dll" "$ER_PATH/$dll.disabled"
 		fi
 	done <<<"$elden_mod_loader_mods"
+	touch "$tmpdir"/integrity.ok
 }
 
 download_required_files() {
@@ -187,6 +188,7 @@ download_required_files() {
 		(cd "$ER_PATH"/mods && unzip -qq -jo "$tmpdir"/ModEngine-2.0.0.1-win64.zip "ModEngine-2.0.0.1-win64/modengine2/bin/*")
 	fi
 	echo "100"
+	touch "$tmpdir"/integrity.ok
 }
 
 if [[ ! -f "$ER_PATH"/eldenring.exe ]]; then
@@ -195,6 +197,13 @@ if [[ ! -f "$ER_PATH"/eldenring.exe ]]; then
 fi
 
 download_required_files | $ZENITY --progress --auto-close --percentage=0 --title "Elden Proton" --text "Downloading required files" || true
+
+if [[ ! -f "$tmpdir"/integrity.ok ]]; then
+	$ZENITY --error --title "Elden Proton" --text "Required files failed to download"
+	exit 1
+else
+	rm -f "$tmpdir"/integrity.ok
+fi
 
 mkdir -p "$ER_PATH"/EldenProton
 [[ -f "$ER_PATH"/EldenProton/state ]] || printf 1 > "$ER_PATH"/EldenProton/state
@@ -257,6 +266,12 @@ EOC
 			[[ $? == 0 ]] && cp -f "$tmpdir"/dllmods.enabled "$ER_PATH"/EldenProton/dllmods.enabled
 			set -e
 			download_enabled_dll_mods | $ZENITY --progress --auto-close --pulsate --title "Elden Proton" --text "Downloading required files" || true
+			if [[ ! -f "$tmpdir"/integrity.ok ]]; then
+				$ZENITY --error --title "Elden Proton" --text "Required files failed to download"
+				exit 1
+			else
+				rm -f "$tmpdir"/integrity.ok
+			fi
 			;;
 		"Edit Settings")
 			set +e
