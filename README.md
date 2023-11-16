@@ -12,6 +12,13 @@ Noob friendly Elden Ring mod loader for linux/proton/steam
 - Set the provided launch options in steam for Elden Ring
 - Launch Elden Ring from steam and customize settings to your liking
 
+## Flatpak Steam
+
+- Make sure that every necessary path (wherever you put `elden-proton.bash` or the folder containing your Modengine2 mods) is accessible from the flatpak
+- CLI example: `flatpak override com.valvesoftware.Steam --filesystem="$HOME/dev/personal:ro"` 
+- Flatseal example: Put `"$HOME/dev/personal:ro"` under Filesystem->Other files for the Steam application
+- Apart from that it should work out of the box
+
 ## Features
 
 - Run Elden Ring modded or unmodded easily
