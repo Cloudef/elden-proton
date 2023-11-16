@@ -14,7 +14,7 @@ CURL=${STEAM_CURL:-curl}
 
 if [[ "x$@" == "x" ]]; then
 	if test -t 0; then
-		printf "%s\n" "$(realpath "$0") %command%"
+		printf "%s\n" "sh \"$(realpath "$0")\" %command%"
 	else
 		$ZENITY --info --title "Elden Proton" --text "$(realpath "$0") %command%"
 	fi
