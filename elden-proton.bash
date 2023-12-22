@@ -11,6 +11,7 @@ ER_PATH="${ER_PATH:-$STEAM_PATH/steamapps/common/ELDEN RING/Game}"
 ZENITY=${STEAM_ZENITY:-zenity}
 UNZIP=${STEAM_UNZIP:-unzip}
 CURL=${STEAM_CURL:-curl}
+SHA256SUM=${STEAM_SHA256SUM:-sha256sum}
 
 if [[ "x$@" == "x" ]]; then
 	if test -t 0; then
@@ -90,8 +91,8 @@ EOV
 
 download_and_verify() {
 	local fpath="$tmpdir/$(basename "$1")"
-	curl -sSL "$1" -o "$fpath"
-	local sum=($(sha256sum "$fpath"))
+	$CURL -sSL "$1" -o "$fpath"
+	local sum=($($SHA256SUM "$fpath"))
 	if [[ "$sum" != "$2" ]]; then
 		$ZENITY --error --title "Elden Proton" --text "Integrity check failed\n$1\ngot: $sum\nexpected: $2"
 		exit 1
@@ -112,17 +113,17 @@ download_dll_mod() {
 	if verify_local_resource "$3" "$2"; then
 		return 0
 	fi
-		
+
 	local fpath="$tmpdir/$(basename "$1")"
 	download_and_verify "$1" "$2" "$3"
 
 	if [[ "$3" == "Seamless Co-op" ]]; then
-		(cd "$ER_PATH" && unzip -qq -o "$fpath")
+		(cd "$ER_PATH" && $UNZIP -qq -o "$fpath")
 		rm -f "$ER_PATH"/launch_elden_ring_seamlesscoop.exe "$ER_PATH"/mods/elden_ring_seamless_coop.dll "$ER_PATH"/mods/seamlesscoopsettings.ini
 		mv "$ER_PATH"/SeamlessCoop/elden_ring_seamless_coop.dll "$ER_PATH"/mods/
 		mv "$ER_PATH"/SeamlessCoop/seamlesscoopsettings.ini "$ER_PATH"/mods/
 	else
-		(cd "$ER_PATH" && unzip -qq -o "$fpath")
+		(cd "$ER_PATH" && $UNZIP -qq -o "$fpath")
 	fi
 }
 
@@ -179,13 +180,13 @@ download_required_files() {
 	echo "10"
 	if ! verify_local_resource elden_mod_loader "$elden_mod_loader_sha256"; then
 		download_and_verify "$elden_mod_loader_url" "$elden_mod_loader_sha256" elden_mod_loader
-		(cd "$ER_PATH" && unzip -qq -o "$tmpdir"/EldenModLoader.zip)
+		(cd "$ER_PATH" && $UNZIP -qq -o "$tmpdir"/EldenModLoader.zip)
 		sed -i 's/load_delay = 5000/load_delay = 2000/' "$ER_PATH"/mod_loader_config.ini
 	fi
 	echo "45"
 	if ! verify_local_resource mod_engine_proton "$mod_engine_proton_sha256"; then
 		download_and_verify "$mod_engine_proton_url" "$mod_engine_proton_sha256" mod_engine_proton
-		(cd "$ER_PATH"/mods && unzip -qq -jo "$tmpdir"/ModEngine-2.0.0.1-win64.zip "ModEngine-2.0.0.1-win64/modengine2/bin/*")
+		(cd "$ER_PATH"/mods && $UNZIP -qq -jo "$tmpdir"/ModEngine-2.0.0.1-win64.zip "ModEngine-2.0.0.1-win64/modengine2/bin/*")
 	fi
 	echo "100"
 	touch "$tmpdir"/integrity.ok
