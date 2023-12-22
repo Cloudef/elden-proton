@@ -91,8 +91,15 @@ EOV
 
 download_and_verify() {
 	local fpath="$tmpdir/$(basename "$1")"
-	$CURL -sSL "$1" -o "$fpath"
+	if ! $CURL -sSL "$1" -o "$fpath"; then
+		$ZENITY --error --title "Elden Proton" --text "Executing curl failed... Do you have curl installed?"
+		exit 1
+	fi
 	local sum=($($SHA256SUM "$fpath"))
+	if [[ $? != 0 ]]; then
+		$ZENITY --error --title "Elden Proton" --text "Executing sha256sum failed... Do you have sha256sum installed?"
+		exit 1
+	fi
 	if [[ "$sum" != "$2" ]]; then
 		$ZENITY --error --title "Elden Proton" --text "Integrity check failed\n$1\ngot: $sum\nexpected: $2"
 		exit 1
