@@ -7,7 +7,7 @@
 set -euo pipefail
 
 STEAM_PATH="${STEAM_PATH:-"$HOME"/.steam/steam}"
-ER_PATH="$STEAM_PATH"/steamapps/common/"ELDEN RING"/Game
+ER_PATH="${ER_PATH:-$STEAM_PATH/steamapps/common/ELDEN RING/Game}"
 ZENITY=${STEAM_ZENITY:-zenity}
 UNZIP=${STEAM_UNZIP:-unzip}
 CURL=${STEAM_CURL:-curl}
