@@ -18,11 +18,15 @@ if [[ -d "$STEAM_RUNTIME" ]]; then
 	OLD_LIBRARY_PATH="$LD_LIBRARY_PATH"
 	export LD_LIBRARY_PATH=
 	# https://github.com/Cloudef/elden-proton/issues/6
-	if [[ "$STEAM_ZENITY" == zenity ]]; then
-		ZENITY="$SYSTEM_ZENITY"
+	if [[ ! "$STEAM_ZENITY" ]] || [[ "$STEAM_ZENITY" == zenity ]]; then
+		if [[ "$SYSTEM_PATH" ]]; then
+			ZENITY="${SYSTEM_ZENITY:-$(PATH="$SYSTEM_PATH" which zenity)}"
+		else
+			# last fallback
+			ZENITY="${SYSTEM_ZENITY:-/usr/bin/zenity}"
+		fi
 	fi
 fi
-
 
 if [[ "x$@" == "x" ]]; then
 	if test -t 0; then
