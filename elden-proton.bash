@@ -13,6 +13,9 @@ UNZIP=${STEAM_UNZIP:-unzip}
 CURL=${STEAM_CURL:-curl}
 SHA256SUM=${STEAM_SHA256SUM:-sha256sum}
 
+# https://github.com/Cloudef/elden-proton/issues/4
+APPLY_LIBRARY_PATH_WORKAROUND=${APPLY_LIBRARY_PATH_WORKAROUND:-1}
+
 if [[ "x$@" == "x" ]]; then
 	if test -t 0; then
 		printf "%s\n" "bash \"$(realpath "$0")\" %command%"
@@ -89,9 +92,17 @@ https://github.com/techiew/EldenRingMods/releases/download/Binaries/UnlockTheFps
 116a523d858ab76ed38ca8a918c1f1e393d646f4d632ea2f692a614524b86a51
 EOV
 
+curlWrapper() {
+	if [[ $APPLY_LIBRARY_PATH_WORKAROUND == 1 ]]; then
+		LD_LIBRARY_PATH= $CURL "$@"
+	else
+		$CURL "$@"
+	fi
+}
+
 download_and_verify() {
 	local fpath="$tmpdir/$(basename "$1")"
-	if ! $CURL -sSL "$1" -o "$fpath"; then
+	if ! curlWrapper -sSL "$1" -o "$fpath"; then
 		$ZENITY --error --title "Elden Proton" --text "Executing curl failed... Do you have curl installed?"
 		exit 1
 	fi
