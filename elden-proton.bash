@@ -13,13 +13,13 @@ UNZIP=${STEAM_UNZIP:-unzip}
 CURL=${STEAM_CURL:-curl}
 SHA256SUM=${STEAM_SHA256SUM:-sha256sum}
 
-if [[ -d "$STEAM_RUNTIME" ]]; then
+if [[ -d "${STEAM_RUNTIME:-}" ]]; then
 	# https://github.com/Cloudef/elden-proton/issues/4
 	OLD_LIBRARY_PATH="$LD_LIBRARY_PATH"
 	export LD_LIBRARY_PATH=
 	# https://github.com/Cloudef/elden-proton/issues/6
-	if [[ ! "$STEAM_ZENITY" ]] || [[ "$STEAM_ZENITY" == zenity ]]; then
-		if [[ "$SYSTEM_PATH" ]]; then
+	if [[ ! "${STEAM_ZENITY:-}" ]] || [[ "${STEAM_ZENITY:-}" == zenity ]]; then
+		if [[ "${SYSTEM_PATH:-}" ]]; then
 			ZENITY="${SYSTEM_ZENITY:-$(PATH="$SYSTEM_PATH" which zenity)}"
 		else
 			# last fallback
@@ -250,7 +250,7 @@ EOC
 	fi
 	case "$option" in
 		"Launch Elden Ring")
-			if [[ -d "$STEAM_RUNTIME" ]]; then
+			if [[ -d "${STEAM_RUNTIME:-}" ]]; then
 				export LD_LIBRARY_PATH="$OLD_LIBRARY_PATH"
 			fi
 			if [[ $mods_enabled == 1 ]]; then
