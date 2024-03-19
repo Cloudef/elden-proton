@@ -189,7 +189,7 @@ download_enabled_dll_mods() {
 		read -r sha256
 	}; do
 		if grep -Fx "$name" "$ER_PATH"/EldenProton/dllmods.enabled > /dev/null; then
-			[[ -f "$ER_PATH/$dll.disabled" ]] && mv "$ER_PATH/$dll"
+			[[ -f "$ER_PATH/$dll.disabled" ]] && mv "$ER_PATH/$dll.disabled"  "$ER_PATH/$dll"
 			download_dll_mod "$url" "$sha256" "$name"
 		elif [[ -f "$ER_PATH/$dll" ]]; then
 			mv "$ER_PATH/$dll" "$ER_PATH/$dll.disabled"
