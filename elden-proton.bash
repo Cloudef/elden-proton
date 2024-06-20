@@ -43,8 +43,8 @@ trap 'rm -rf "$tmpdir"' EXIT
 elden_mod_loader_url="https://github.com/techiew/EldenRingModLoader/releases/download/Binary/EldenModLoader.zip"
 elden_mod_loader_sha256="41d90de7506474689fd711ac421897642a3f5ff0391c313773263a43a83af66d"
 
-mod_engine_proton_url="https://github.com/Cloudef/ModEngine2/releases/download/2.0.0.1-proton-v4/ModEngine-2.0.0.1-win64.zip"
-mod_engine_proton_sha256="2080639cd1186952a3c66875bb52454ecd33ea28675c45811e3d82c2d031c8f3"
+mod_engine_proton_url="https://github.com/Cloudef/ModEngine2/releases/download/2.1.0.0-proton-v1/ModEngine-2.1.0.0-win64.zip"
+mod_engine_proton_sha256="b8c858594529be3fc428840c263ed5a367283243111d01e1d75fbb40903d95c2"
 
 read -r -d '' elden_mod_loader_mods <<'EOV' || true
 Seamless Co-op
@@ -208,7 +208,7 @@ download_required_files() {
 	echo "45"
 	if ! verify_local_resource mod_engine_proton "$mod_engine_proton_sha256"; then
 		download_and_verify "$mod_engine_proton_url" "$mod_engine_proton_sha256" mod_engine_proton
-		(cd "$ER_PATH"/mods && $UNZIP -qq -jo "$tmpdir"/ModEngine-2.0.0.1-win64.zip "ModEngine-2.0.0.1-win64/modengine2/bin/*")
+		(cd "$ER_PATH"/mods && $UNZIP -qq -jo "$tmpdir"/ModEngine-2.1.0.0-win64.zip "ModEngine-2.1.0.0-win64/modengine2/bin/*")
 	fi
 	echo "100"
 	touch "$tmpdir"/integrity.ok
