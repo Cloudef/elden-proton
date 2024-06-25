@@ -59,7 +59,7 @@ https://github.com/techiew/EldenRingMods/releases/download/Binaries/AdjustTheFov
 339a27e94780c1550380d0fbc81026265da0539f95cfd004b012ec5c99c8323b
 Disable Rune Loss
 mods/DisableRuneLoss.dll
- 
+
 https://github.com/techiew/EldenRingMods/releases/download/Binaries/DisableRuneLoss.zip
 6d69b51cde189b8ebedcd858aa5b25bb394c49e8e1df79c207a28d46ce0ccf6b
 Fix The Camera
@@ -69,7 +69,7 @@ https://github.com/techiew/EldenRingMods/releases/download/Binaries/FixTheCamera
 749174278e9147fb099c37592f98811c9e737645c913d12fe64b9b94bd03250d
 Increase Animation Distance
 mods/IncreaseAnimationDistance.dll
- 
+
 https://github.com/techiew/EldenRingMods/releases/download/Binaries/IncreaseAnimationDistance.zip
 4a120852e5eb71e42abd2d7180a7fbf0a4eb8fbcda797d4cbba54c865b1dc4af
 Pause The Game
@@ -79,17 +79,17 @@ https://github.com/techiew/EldenRingMods/releases/download/Binaries/PauseTheGame
 9040fc6442d45f70c44d4a711cea6f4078b811e0761f799d36b5e133987d8928
 Remove Black Bars
 mods/UltrawideFix.dll
- 
+
 https://github.com/techiew/EldenRingMods/releases/download/Binaries/RemoveBlackBars.zip
 905f1ebc76a411d89f9276677000a10de200951209d0eacad812c4aefc3c13e0
 Remove Chromatic Aberration
 mods/RemoveChromaticAbberation.dll
- 
+
 https://github.com/techiew/EldenRingMods/releases/download/Binaries/RemoveChromaticAberration.zip
 2b9725dbc9c0825bb7f366bc8d01e659d62db4bc12d89ceb4d55287a3c23d13f
 Remove Vignette
 mods/RemoveVignette.dll
- 
+
 https://github.com/techiew/EldenRingMods/releases/download/Binaries/RemoveVignette.zip
 cdd9a3faf127d7f6fdf57e0e3772d1e849603b2c20ad32a41b8883fb6e3600d6
 Skip The Intro
