@@ -260,10 +260,14 @@ EOC
 					set -- "$@" "$(sed 's/start_protected_game.exe/eldenring.exe/' <<<"$arg")"
 				done
 				mod_path=
+				# https://github.com/Cloudef/elden-proton/issues/13
+				[[ -f "$ER_PATH"/dinput8.dll.disabled ]] && mv "$ER_PATH"/dinput8.dll.disabled "$ER_PATH"/dinput8.dll
 				[[ -f "$ER_PATH"/EldenProton/modengine2.modpath ]] && mod_path="$(cat "$ER_PATH"/EldenProton/modengine2.modpath)"
 				WINEDLLOVERRIDES="dinput8.dll=n,b" MODENGINE_CONFIG="$mod_path"/config_eldenring.toml "$@"
 				exit $?
 			else
+				# https://github.com/Cloudef/elden-proton/issues/13
+				[[ -f "$ER_PATH"/dinput8.dll ]] && mv "$ER_PATH"/dinput8.dll "$ER_PATH"/dinput8.dll.disabled
 				WINEDLLOVERRIDES="dinput8.dll=b" "$@"
 				exit $?
 			fi
