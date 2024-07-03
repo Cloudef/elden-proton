@@ -37,6 +37,21 @@ if [[ "x$@" == "x" ]]; then
 	exit 0
 fi
 
+# effortless nixos support, requires flakes enabled
+if [[ -f /etc/os-release ]]; then
+	source /etc/os-release
+	if [[ "$ID" == nixos ]]; then
+		UNZIP="${STEAM_UNZIP:-$(nix shell nixpkgs#unzip -c which unzip)}"
+		CURL="${STEAM_CURL:-$(nix shell nixpkgs#curl -c which curl)}"
+		SHA256SUM="${STEAM_SHA256SUM:-$(nix shell nixpkgs#coreutils -c which sha256sum)}"
+	fi
+fi
+
+if ! $UNZIP -v 1>/dev/null; then
+	$ZENITY --error --title "Elden Proton" --text "Executing unzip failed... Do you have unzip installed?"
+	exit 1
+fi
+
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
 
