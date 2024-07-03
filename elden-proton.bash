@@ -62,11 +62,6 @@ mod_engine_proton_url="https://github.com/Cloudef/ModEngine2/releases/download/2
 mod_engine_proton_sha256="b8c858594529be3fc428840c263ed5a367283243111d01e1d75fbb40903d95c2"
 
 read -r -d '' elden_mod_loader_mods <<'EOV' || true
-Seamless Co-op
-mods/elden_ring_seamless_coop.dll
-mods/seamlesscoopsettings.ini
-https://github.com/LukeYui/EldenRingSeamlessCoopRelease/releases/download/v.1.5.1/betarealeasecoop1.5.1.zip
-657a0fa3229b103f7d995e0cefae106582acf0a45bf8b11065769ab5e2899114
 Adjust The Fov
 mods/AdjustTheFov.dll
 mods/AdjustTheFov/config.ini
@@ -154,14 +149,7 @@ download_dll_mod() {
 	local fpath="$tmpdir/$(basename "$1")"
 	download_and_verify "$1" "$2" "$3"
 
-	if [[ "$3" == "Seamless Co-op" ]]; then
-		(cd "$ER_PATH" && $UNZIP -qq -o "$fpath")
-		rm -f "$ER_PATH"/launch_elden_ring_seamlesscoop.exe "$ER_PATH"/mods/elden_ring_seamless_coop.dll "$ER_PATH"/mods/seamlesscoopsettings.ini
-		mv "$ER_PATH"/SeamlessCoop/elden_ring_seamless_coop.dll "$ER_PATH"/mods/
-		mv "$ER_PATH"/SeamlessCoop/seamlesscoopsettings.ini "$ER_PATH"/mods/
-	else
-		(cd "$ER_PATH" && $UNZIP -qq -o "$fpath")
-	fi
+	(cd "$ER_PATH" && $UNZIP -qq -o "$fpath")
 }
 
 dll_mod_list() {
