@@ -27,6 +27,7 @@ Noob friendly Elden Ring mod loader for linux/proton/steam
 - Automatically manages and downloads popular DLL mods
 - Easy access to DLL mod configuration files
 - Run ModEngine2 compatible mods simply by choosing the mod directory
+- Save Manager for backing up, restoring and managing game saves
 
 ## Modengine2 mods
 
@@ -42,3 +43,13 @@ Many mods in NexusMods come with ModEngine2 bundled. Simply choose any folder th
 In your `Elden Ring/Game` location, remove the `mods` and `EldenProton` folders. 
 Remove only the `EldenProton` folder if you want to reset state and re-download everything.
 Note that all DLL mod settings will be reset.
+
+## Save Manager
+
+The Save Manager provides an easy way to manage your Elden Ring save files:
+- Create quicksaves at any time
+- Rename and organize your saves
+- Load previous save states
+- Delete unwanted saves
+
+All backup saves are stored in the `er_saves` directory next to the script.
