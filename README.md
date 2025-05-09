@@ -2,6 +2,10 @@
 
 Noob friendly Elden Ring mod loader for linux/proton/steam
 
+> [!NOTE]
+> elden-proton is currently not actively maintained
+> [Click here for up-to-date fork with additional features](https://github.com/VirusAlex/elden-proton)
+
 ![steam launch options](.github/images/launch-options.png)
 ![launcher ui](.github/images/ui.png)
 
